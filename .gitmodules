@@ -1,0 +1,4 @@
+[submodule "gdproject/gdnative"]
+	path = gdproject/gdnative
+	url = git@github.com:ducklin5/isochrome-gdnative.git
+	branch = master
