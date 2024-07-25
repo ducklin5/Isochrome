@@ -1,0 +1,185 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Actor",
+"language": "GDScript",
+"path": "res://content/src/game/entities/actors/actor.gd"
+}, {
+"base": "Resource",
+"class": "Chroma",
+"language": "GDScript",
+"path": "res://content/src/game/chroma/chroma.gd"
+}, {
+"base": "Node",
+"class": "Controller",
+"language": "GDScript",
+"path": "res://content/src/game/core/controller.gd"
+}, {
+"base": "Actor",
+"class": "Creature",
+"language": "GDScript",
+"path": "res://content/src/game/entities/actors/creatures/creature.gd"
+}, {
+"base": "Node2D",
+"class": "Floor",
+"language": "NativeScript",
+"path": "res://content/src/game/maps/core/floor.gdns"
+}, {
+"base": "Node",
+"class": "Game",
+"language": "GDScript",
+"path": "res://content/src/game/core/game.gd"
+}, {
+"base": "Area2D",
+"class": "InteractArea",
+"language": "GDScript",
+"path": "res://content/src/game/entities/interact/interact_area.gd"
+}, {
+"base": "Node2D",
+"class": "Map",
+"language": "GDScript",
+"path": "res://content/src/game/maps/core/map.gd"
+}, {
+"base": "Node",
+"class": "MapAgent",
+"language": "GDScript",
+"path": "res://content/src/game/maps/core/map_agent.gd"
+}, {
+"base": "RigidBody2D",
+"class": "PlatformPiece",
+"language": "GDScript",
+"path": "res://content/src/game/entities/platform/platform_piece.gd"
+}, {
+"base": "Controller",
+"class": "PlayerController",
+"language": "GDScript",
+"path": "res://content/src/game/player/player_controller.gd"
+}, {
+"base": "Node",
+"class": "PlayerState",
+"language": "GDScript",
+"path": "res://content/src/game/player/player_state.gd"
+}, {
+"base": "Actor",
+"class": "Totem",
+"language": "GDScript",
+"path": "res://content/src/game/entities/actors/characters/totem/totem.gd"
+} ]
+_global_script_class_icons={
+"Actor": "",
+"Chroma": "",
+"Controller": "",
+"Creature": "",
+"Floor": "",
+"Game": "",
+"InteractArea": "",
+"Map": "",
+"MapAgent": "",
+"PlatformPiece": "",
+"PlayerController": "",
+"PlayerState": "",
+"Totem": ""
+}
+
+[application]
+
+config/name="Isochrome"
+run/main_scene="res://content/src/menus/main/main.tscn"
+config/icon="res://assets/icon.png"
+
+[autoload]
+
+Global="*res://content/src/scripts/global.gd"
+Util="*res://content/src/scripts/util.gd"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/imjp94.yafsm/plugin.cfg" )
+
+[global]
+
+collision=false
+pixel=false
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
+
+[input]
+
+move_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+move_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+interact={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_physics/layer_1="Default"
+2d_physics/layer_2="Ground"
+2d_physics/layer_3="Boundary"
+2d_physics/layer_4="Terrain "
+2d_physics/layer_5="Interactable"
+
+[physics]
+
+2d/default_gravity=0
+2d/default_gravity_vector=Vector2( 0, 0 )
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+quality/2d/use_pixel_snap=false

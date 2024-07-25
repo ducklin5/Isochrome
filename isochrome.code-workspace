@@ -1,0 +1,60 @@
+{
+	"folders": [
+		{
+			"path": "builds"
+		},
+		{
+			"path": "engine"
+		},
+		{
+			"path": "gdproject/gdnative"
+		},
+		{
+			"path": "gdproject"
+		},
+		{
+			"path": "logs"
+		}
+	],
+	"settings": {
+		"godot_tools.editor_path": "${workspaceFolder:engine}/godot"
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [	
+			{
+				"type": "lldb",
+				"request": "launch",
+				"name": "LLDB Debug Game",
+				"program": "${workspaceFolder:engine}/godot",
+				"args": ["-d"],
+				"cwd": "${workspaceFolder:gdproject}",
+			},
+			{
+				"type": "lldb",
+				"request": "launch",
+				"name": "LLDB Debug Editor",
+				"program": "${workspaceFolder:engine}/godot",
+				"args": ["-d", "-e"],
+				"cwd": "${workspaceFolder:gdproject}",
+			}
+		],
+	},
+
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Run Editor",
+				"type": "shell",
+				"command": "${workspaceFolder:engine}/godot",
+				"args": ["-e"],
+				"problemMatcher": [],
+				"isBackground": true,
+				"options": {
+					"cwd": "${workspaceFolder:gdproject}",
+				},
+			}
+		]
+	}
+}

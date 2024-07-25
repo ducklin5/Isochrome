@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://content/src/game/entities/interact/interact_area.gd" type="Script" id=1]
+[ext_resource path="res://assets/game/maps/gate.png" type="Texture" id=2]
+[ext_resource path="res://content/src/game/entities/gate/gate.gd" type="Script" id=3]
+
+[node name="Gate" type="RigidBody2D"]
+mode = 1
+script = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -32, 0, 0, -16, 32, 0 )
+
+[node name="Sprite" type="Sprite" parent="."]
+light_mask = 32
+texture = ExtResource( 2 )
+offset = Vector2( 0, -24 )
+
+[node name="BodyLight" type="Light2D" parent="."]
+texture = ExtResource( 2 )
+offset = Vector2( 0, -24 )
+mode = 2
+range_item_cull_mask = 32
+
+[node name="InteractArea" type="Area2D" parent="."]
+position = Vector2( 0, -40 )
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InteractArea"]
+position = Vector2( 0, -56 )
+polygon = PoolVector2Array( -32, 96, 0, 112, 32, 96 )
+
+[connection signal="activated" from="InteractArea" to="." method="_on_InteractArea_activated"]
+[connection signal="deactivated" from="InteractArea" to="." method="_on_InteractArea_deactivated"]
+[connection signal="triggered" from="InteractArea" to="." method="_on_InteractArea_triggered"]

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://content/src/game/chroma/chroma.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+name = "Rose"
+color = Color( 0.988235, 0.470588, 0.701961, 1 )
+light_layer = 4096

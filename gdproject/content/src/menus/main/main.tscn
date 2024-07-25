@@ -1,0 +1,244 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://content/src/menus/main/main.gd" type="Script" id=1]
+[ext_resource path="res://content/src/menus/main.tres" type="Theme" id=2]
+[ext_resource path="res://assets/fonts/8-BIT WONDER.TTF" type="DynamicFontData" id=3]
+[ext_resource path="res://content/src/menus/main/ChromaDemo.gd" type="Script" id=5]
+[ext_resource path="res://content/src/game/chroma/gold.tres" type="Resource" id=6]
+[ext_resource path="res://content/src/game/chroma/rose.tres" type="Resource" id=7]
+[ext_resource path="res://content/src/game/chroma/aqua.tres" type="Resource" id=8]
+[ext_resource path="res://content/src/game/entities/gate/gate.tscn" type="PackedScene" id=9]
+
+[sub_resource type="VisualShaderNodeInput" id=1]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeTextureUniform" id=2]
+uniform_name = "Texture"
+
+[sub_resource type="VisualShaderNodeTransformVecMult" id=3]
+
+[sub_resource type="VisualShaderNodeTransformUniform" id=4]
+uniform_name = "transform"
+
+[sub_resource type="VisualShader" id=5]
+code = "shader_type canvas_item;
+uniform mat4 transform;
+uniform sampler2D Texture;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// TransformUniform:5
+	mat4 n_out5p0 = transform;
+
+// Input:2
+	vec3 n_out2p0 = vec3(UV, 0.0);
+
+// TransformVectorMult:4
+	vec3 n_out4p0 = (n_out5p0 * vec4(n_out2p0, 1.0)).xyz;
+
+// TextureUniform:3
+	vec3 n_out3p0;
+	float n_out3p1;
+	{
+		vec4 n_tex_read = texture(Texture, n_out4p0.xy);
+		n_out3p0 = n_tex_read.rgb;
+		n_out3p1 = n_tex_read.a;
+	}
+
+// Output:0
+	COLOR.rgb = n_out3p0;
+	COLOR.a = n_out3p1;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -233.261, 2.30438 )
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2( 900, 140 )
+nodes/fragment/2/node = SubResource( 1 )
+nodes/fragment/2/position = Vector2( -60, 300 )
+nodes/fragment/3/node = SubResource( 2 )
+nodes/fragment/3/position = Vector2( 460, 100 )
+nodes/fragment/4/node = SubResource( 3 )
+nodes/fragment/4/position = Vector2( 160, 160 )
+nodes/fragment/5/node = SubResource( 4 )
+nodes/fragment/5/position = Vector2( -80, 160 )
+nodes/fragment/connections = PoolIntArray( 3, 0, 0, 0, 3, 1, 0, 1, 4, 0, 3, 0, 2, 0, 4, 1, 5, 0, 4, 0 )
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.577465 )
+colors = PoolColorArray( 0.262745, 0.262745, 0.262745, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 5 )
+shader_param/transform = Transform( 0, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0 )
+shader_param/Texture = SubResource( 7 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 60
+font_data = ExtResource( 3 )
+
+[node name="BG" type="Panel"]
+material = SubResource( 8 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+chroma_to_demo = [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ) ]
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Body" type="MarginContainer" parent="VBox"]
+margin_right = 1024.0
+margin_bottom = 474.0
+custom_constants/margin_top = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBox/Body"]
+margin_top = 10.0
+margin_right = 1024.0
+margin_bottom = 474.0
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Body"]
+margin_left = 238.0
+margin_top = 10.0
+margin_right = 786.0
+margin_bottom = 474.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/separation = 32
+
+[node name="Title" type="Label" parent="VBox/Body/VBox"]
+margin_right = 548.0
+margin_bottom = 68.0
+custom_fonts/font = SubResource( 9 )
+text = "ISOCHROME"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer" type="Control" parent="VBox/Body/VBox"]
+margin_top = 100.0
+margin_right = 548.0
+margin_bottom = 100.0
+size_flags_vertical = 3
+
+[node name="ChromaDemo" type="VBoxContainer" parent="VBox/Body/VBox"]
+margin_top = 132.0
+margin_right = 548.0
+margin_bottom = 304.0
+script = ExtResource( 5 )
+
+[node name="ViewportContainer" type="ViewportContainer" parent="VBox/Body/VBox/ChromaDemo"]
+margin_right = 548.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 0, 128 )
+size_flags_horizontal = 3
+size_flags_vertical = 7
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="VBox/Body/VBox/ChromaDemo/ViewportContainer"]
+size = Vector2( 548, 128 )
+size_override_stretch = true
+transparent_bg = true
+handle_input_locally = false
+usage = 0
+render_target_update_mode = 3
+
+[node name="Gate" parent="VBox/Body/VBox/ChromaDemo/ViewportContainer/Viewport" instance=ExtResource( 9 )]
+
+[node name="Camera2D" type="Camera2D" parent="VBox/Body/VBox/ChromaDemo/ViewportContainer/Viewport"]
+position = Vector2( 0, -24 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+
+[node name="Label" type="Label" parent="VBox/Body/VBox/ChromaDemo"]
+margin_top = 132.0
+margin_right = 548.0
+margin_bottom = 172.0
+text = "Aqua"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spacer2" type="Control" parent="VBox/Body/VBox"]
+margin_top = 336.0
+margin_right = 548.0
+margin_bottom = 336.0
+size_flags_vertical = 3
+
+[node name="HBox" type="VBoxContainer" parent="VBox/Body/VBox"]
+margin_left = 215.0
+margin_top = 368.0
+margin_right = 332.0
+margin_bottom = 464.0
+size_flags_horizontal = 4
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HowTo" type="Button" parent="VBox/Body/VBox/HBox"]
+margin_right = 117.0
+margin_bottom = 40.0
+text = "HowTo"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" type="Button" parent="VBox/Body/VBox/HBox"]
+margin_top = 56.0
+margin_right = 117.0
+margin_bottom = 96.0
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Footer" type="MarginContainer" parent="VBox"]
+margin_top = 478.0
+margin_right = 1024.0
+margin_bottom = 534.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="version" type="Label" parent="VBox/Footer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 1016.0
+margin_bottom = 48.0
+text = "Ver.1.00"
+
+[connection signal="pressed" from="VBox/Body/VBox/HBox/HowTo" to="." method="_on_HowTo_pressed"]
+[connection signal="pressed" from="VBox/Body/VBox/HBox/Play" to="." method="_on_Play_pressed"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://content/src/game/entities/platform/boundary.gd" type="Script" id=1]
+[ext_resource path="res://assets/game/maps/blank.png" type="Texture" id=2]
+
+[node name="Boundary" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 4
+mode = 1
+script = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 0, -8, -16, 0, 0, 8, 16, 0 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 8 )
+texture = ExtResource( 2 )

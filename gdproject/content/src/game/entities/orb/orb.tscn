@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/game/entities/light_area.png" type="Texture" id=1]
+[ext_resource path="res://assets/game/items/orb.png" type="Texture" id=2]
+[ext_resource path="res://content/src/game/entities/interact/interact_area.gd" type="Script" id=3]
+[ext_resource path="res://content/src/game/entities/orb/orb.gd" type="Script" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.0
+
+[node name="Orb" type="Node2D"]
+light_mask = 0
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+light_mask = 32
+position = Vector2( 0, -12 )
+texture = ExtResource( 2 )
+
+[node name="AreaLight" type="Light2D" parent="."]
+texture = ExtResource( 1 )
+texture_scale = 0.1
+color = Color( 0.552941, 0.972549, 0.913725, 1 )
+energy = 1.1
+range_z_max = 0
+
+[node name="BodyLight" type="Light2D" parent="."]
+position = Vector2( 0, -12 )
+texture = ExtResource( 2 )
+color = Color( 0.552941, 0.972549, 0.913725, 1 )
+range_item_cull_mask = 32
+
+[node name="InteractArea" type="Area2D" parent="."]
+position = Vector2( 0, -12 )
+collision_layer = 16
+collision_mask = 16
+script = ExtResource( 3 )
+indicator_position = Vector2( 0, -24 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource( 1 )
+
+[connection signal="activated" from="InteractArea" to="." method="_on_InteractArea_activated"]
+[connection signal="deactivated" from="InteractArea" to="." method="_on_InteractArea_deactivated"]
+[connection signal="triggered" from="InteractArea" to="." method="_on_InteractArea_triggered"]

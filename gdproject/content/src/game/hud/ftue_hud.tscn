@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://content/src/menus/main.tres" type="Theme" id=1]
+[ext_resource path="res://content/src/game/hud/ftue_hud.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/manaspc.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/ui/buttons_keys/mouse.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 4 )
+region = Rect2( 16, 48, 16, 16 )
+
+[node name="hud" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="info_panel" type="PanelContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = -161.0
+margin_right = 484.0
+margin_bottom = -44.0
+theme = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="info_panel"]
+margin_left = 6.0
+margin_top = 4.0
+margin_right = 446.0
+margin_bottom = 113.0
+
+[node name="Panel" type="Panel" parent="info_panel/HBoxContainer"]
+margin_right = 128.0
+margin_bottom = 109.0
+rect_min_size = Vector2( 128, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="info_panel/HBoxContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="info_panel/HBoxContainer"]
+margin_left = 132.0
+margin_right = 440.0
+margin_bottom = 109.0
+size_flags_horizontal = 3
+custom_fonts/normal_font = SubResource( 1 )
+
+[node name="Control" type="Control" parent="info_panel"]
+margin_left = 6.0
+margin_top = 4.0
+margin_right = 446.0
+margin_bottom = 113.0
+
+[node name="TextureRect" type="TextureRect" parent="info_panel/Control"]
+margin_left = 420.028
+margin_top = 88.294
+margin_right = 436.028
+margin_bottom = 105.294
+texture = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClickArea" type="Control" parent="info_panel"]
+margin_left = 6.0
+margin_top = 4.0
+margin_right = 446.0
+margin_bottom = 113.0
+
+[connection signal="gui_input" from="info_panel/ClickArea" to="." method="_on_ClickArea_gui_input"]
